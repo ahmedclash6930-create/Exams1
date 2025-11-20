@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طلاب علوم - منصة التعليم الطلابية</title>
+    <title>طلاب علوم - المنصة التعليمية المتكاملة</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
@@ -16,6 +16,7 @@
             --text-light: #718096;
             --white: #FFFFFF;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
         
         * {
@@ -89,7 +90,7 @@
             text-decoration: none;
             color: var(--text-dark);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
         
         nav ul li a:hover {
@@ -105,10 +106,11 @@
             border-radius: 5px;
             font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
             text-decoration: none;
             display: inline-block;
             text-align: center;
+            border: none;
         }
         
         .btn-outline {
@@ -215,7 +217,7 @@
             padding: 30px;
             box-shadow: var(--shadow);
             text-align: center;
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
         
         .feature-card:hover {
@@ -261,7 +263,7 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            transition: var(--transition);
         }
         
         .subject-card:hover {
@@ -370,6 +372,11 @@
             border-radius: 10px;
             overflow: hidden;
             box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+        
+        .course-card:hover {
+            transform: translateY(-5px);
         }
         
         .course-image {
@@ -407,6 +414,176 @@
             height: 100%;
             background: var(--secondary-green);
             border-radius: 4px;
+        }
+        
+        /* Interactive Elements */
+        .interactive-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a2530 100%);
+            color: var(--white);
+            text-align: center;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--secondary-green);
+        }
+        
+        /* Login Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: var(--white);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-light);
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        /* User Dashboard */
+        .dashboard {
+            display: none;
+            margin-top: 80px;
+            padding: 40px 0;
+        }
+        
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .user-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--secondary-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 24px;
+            margin-left: 15px;
+        }
+        
+        .dashboard-nav {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .dashboard-nav button {
+            padding: 12px 20px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-bottom: 3px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .dashboard-nav button.active {
+            border-bottom: 3px solid var(--secondary-green);
+            color: var(--secondary-green);
+        }
+        
+        .dashboard-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        .my-courses, .progress-tracker, .upcoming-classes {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+        
+        .course-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .course-item:last-child {
+            border-bottom: none;
+        }
+        
+        .course-thumb {
+            width: 80px;
+            height: 60px;
+            background: #ddd;
+            border-radius: 5px;
+            margin-left: 15px;
         }
         
         /* Footer */
@@ -451,7 +628,7 @@
         .footer-column ul li a {
             color: #CBD5E0;
             text-decoration: none;
-            transition: color 0.3s;
+            transition: var(--transition);
         }
         
         .footer-column ul li a:hover {
@@ -474,7 +651,7 @@
             justify-content: center;
             color: var(--white);
             text-decoration: none;
-            transition: all 0.3s;
+            transition: var(--transition);
         }
         
         .social-icons a:hover {
@@ -501,12 +678,8 @@
                 text-align: center;
             }
             
-            nav ul {
-                display: none;
-            }
-            
-            .mobile-menu {
-                display: block;
+            .dashboard-content {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -526,6 +699,10 @@
             
             .btn {
                 width: 100%;
+            }
+            
+            nav ul {
+                display: none;
             }
         }
     </style>
@@ -550,8 +727,8 @@
                     </ul>
                 </nav>
                 <div class="auth-buttons">
-                    <a href="#" class="btn btn-outline">تسجيل الدخول</a>
-                    <a href="#" class="btn btn-filled">انضم إلينا</a>
+                    <button id="loginBtn" class="btn btn-outline">تسجيل الدخول</button>
+                    <button id="signupBtn" class="btn btn-filled">انضم إلينا</button>
                 </div>
             </div>
         </div>
@@ -668,119 +845,183 @@
         </div>
     </section>
 
-    <!-- Teachers Section -->
-    <section class="teachers">
+    <!-- Interactive Stats Section -->
+    <section class="interactive-section">
         <div class="container">
             <div class="section-title">
-                <h2>مدرسون متميزون</h2>
-                <p>تعلم من أفضل الطلاب والخريجين المتفوقين في تخصصاتهم</p>
+                <h2>إحصائيات حية</h2>
+                <p>انضم إلى مجتمعنا المتنامي من الطلاب والمدرسين</p>
             </div>
-            <div class="teachers-grid">
-                <div class="teacher-card">
-                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="teacher-info">
-                        <h3>أحمد محمد</h3>
-                        <p>خريج كلية الطب - متخصص في الكيمياء</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                        </div>
-                        <p>عدد الطلاب: 350+</p>
-                    </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number" id="studentsCount">0</div>
+                    <div class="stat-label">طالب مسجل</div>
                 </div>
-                <div class="teacher-card">
-                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="teacher-info">
-                        <h3>سارة أحمد</h3>
-                        <p>طالبة صيدلة - متخصصة في الأحياء</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <p>عدد الطلاب: 280+</p>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="coursesCount">0</div>
+                    <div class="stat-label">دورة تعليمية</div>
                 </div>
-                <div class="teacher-card">
-                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="teacher-info">
-                        <h3>يوسف خالد</h3>
-                        <p>خريج هندسة - متخصص في الفيزياء</p>
-                        <div class="rating">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="far fa-star"></i>
-                        </div>
-                        <p>عدد الطلاب: 420+</p>
-                    </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="teachersCount">0</div>
+                    <div class="stat-label">مدرس معتمد</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="successRate">0%</div>
+                    <div class="stat-label">نسبة النجاح</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Courses Section -->
-    <section class="courses">
-        <div class="container">
-            <div class="section-title">
-                <h2>الدورات الأكثر شيوعًا</h2>
-                <p>انضم إلى آلاف الطلاب الذين يستفيدون من دوراتنا التعليمية</p>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>تسجيل الدخول</h2>
+                <button class="close-modal">&times;</button>
             </div>
-            <div class="courses-grid">
-                <div class="course-card">
-                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="course-content">
-                        <h3>الكيمياء العضوية المتقدمة</h3>
-                        <div class="course-meta">
-                            <span><i class="far fa-clock"></i> 24 ساعة</span>
-                            <span><i class="far fa-user"></i> 340 طالب</span>
-                        </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 75%;"></div>
-                        </div>
-                        <p>شامل لجميع أساسيات الكيمياء العضوية وتطبيقاتها</p>
-                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">كلمة المرور</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit" class="btn btn-filled" style="width: 100%;">تسجيل الدخول</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">ليس لديك حساب؟ <a href="#" id="switchToSignup">سجل الآن</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>إنشاء حساب جديد</h2>
+                <button class="close-modal">&times;</button>
+            </div>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="fullName">الاسم الكامل</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">البريد الإلكتروني</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">كلمة المرور</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                <button type="submit" class="btn btn-filled" style="width: 100%;">إنشاء الحساب</button>
+            </form>
+            <p style="text-align: center; margin-top: 15px;">لديك حساب بالفعل؟ <a href="#" id="switchToLogin">سجل الدخول</a></p>
+        </div>
+    </div>
+
+    <!-- User Dashboard -->
+    <div id="userDashboard" class="dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h2 id="userWelcome">مرحباً، أحمد!</h2>
+                        <p>طالب في الصف الثالث الثانوي</p>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="course-content">
-                        <h3>الفيزياء الحديثة</h3>
-                        <div class="course-meta">
-                            <span><i class="far fa-clock"></i> 18 ساعة</span>
-                            <span><i class="far fa-user"></i> 290 طالب</span>
+                <button id="logoutBtn" class="btn btn-outline">تسجيل الخروج</button>
+            </div>
+            
+            <div class="dashboard-nav">
+                <button class="active" data-tab="courses">دوراتي</button>
+                <button data-tab="progress">تقدمي</button>
+                <button data-tab="schedule">جدولي</button>
+                <button data-tab="profile">ملفي الشخصي</button>
+            </div>
+            
+            <div class="dashboard-content">
+                <div class="my-courses">
+                    <h3>دوراتي النشطة</h3>
+                    <div class="course-item">
+                        <div class="course-thumb" style="background: linear-gradient(135deg, #8E44AD, #9B59B6);"></div>
+                        <div>
+                            <h4>الكيمياء العضوية المتقدمة</h4>
+                            <p>الأستاذ أحمد محمد</p>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%;"></div>
+                            </div>
+                            <p>75% مكتمل</p>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 40%;"></div>
+                    </div>
+                    <div class="course-item">
+                        <div class="course-thumb" style="background: linear-gradient(135deg, #3498DB, #5DADE2);"></div>
+                        <div>
+                            <h4>الفيزياء الحديثة</h4>
+                            <p>الأستاذ يوسف خالد</p>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 40%;"></div>
+                            </div>
+                            <p>40% مكتمل</p>
                         </div>
-                        <p>استكشاف النظريات الفيزيائية الحديثة وتطبيقاتها</p>
-                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
                     </div>
                 </div>
-                <div class="course-card">
-                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
-                    <div class="course-content">
-                        <h3>الوراثة والأحياء الجزيئية</h3>
-                        <div class="course-meta">
-                            <span><i class="far fa-clock"></i> 30 ساعة</span>
-                            <span><i class="far fa-user"></i> 510 طالب</span>
+                
+                <div>
+                    <div class="progress-tracker">
+                        <h3>تقدمي العام</h3>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>الكيمياء</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%;"></div>
+                            </div>
                         </div>
-                        <div class="progress-bar">
-                            <div class="progress" style="width: 90%;"></div>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>الفيزياء</span>
+                                <span>40%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 40%;"></div>
+                            </div>
                         </div>
-                        <p>فهم أساسيات الوراثة وتطبيقاتها في العلوم الطبية</p>
-                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
+                        <div style="margin: 20px 0;">
+                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                                <span>الأحياء</span>
+                                <span>20%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 20%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="upcoming-classes">
+                        <h3>الحصص القادمة</h3>
+                        <div style="margin: 15px 0; padding: 10px; background: #f5f5f5; border-radius: 5px;">
+                            <p><strong>الكيمياء العضوية</strong></p>
+                            <p>غداً، 10:00 صباحاً</p>
+                        </div>
+                        <div style="margin: 15px 0; padding: 10px; background: #f5f5f5; border-radius: 5px;">
+                            <p><strong>الفيزياء الحديثة</strong></p>
+                            <p>بعد غد، 2:00 مساءً</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 
     <!-- Footer -->
     <footer>
@@ -832,26 +1073,156 @@
     </footer>
 
     <script>
-        // Simple JavaScript for interactive elements
-        document.addEventListener('DOMContentLoaded', function() {
-            // Add animation to feature cards on scroll
-            const featureCards = document.querySelectorAll('.feature-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = 1;
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            featureCards.forEach(card => {
-                card.style.opacity = 0;
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'opacity 0.5s, transform 0.5s';
-                observer.observe(card);
+        // عناصر DOM
+        const loginBtn = document.getElementById('loginBtn');
+        const signupBtn = document.getElementById('signupBtn');
+        const loginModal = document.getElementById('loginModal');
+        const signupModal = document.getElementById('signupModal');
+        const closeModalButtons = document.querySelectorAll('.close-modal');
+        const switchToSignup = document.getElementById('switchToSignup');
+        const switchToLogin = document.getElementById('switchToLogin');
+        const loginForm = document.getElementById('loginForm');
+        const signupForm = document.getElementById('signupForm');
+        const userDashboard = document.getElementById('userDashboard');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const dashboardNavButtons = document.querySelectorAll('.dashboard-nav button');
+        
+        // فتح نافذة تسجيل الدخول
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+        
+        // فتح نافذة إنشاء حساب
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+        });
+        
+        // إغلاق النوافذ
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
             });
+        });
+        
+        // التبديل بين نافذتي تسجيل الدخول وإنشاء حساب
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+        });
+        
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+        
+        // معالجة تسجيل الدخول
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // في التطبيق الحقيقي، هنا سيتم التحقق من بيانات المستخدم
+            loginModal.style.display = 'none';
+            userDashboard.style.display = 'block';
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.subjects').style.display = 'none';
+            document.querySelector('.interactive-section').style.display = 'none';
+            document.querySelector('footer').style.marginTop = '0';
+        });
+        
+        // معالجة إنشاء حساب
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // في التطبيق الحقيقي، هنا سيتم إنشاء حساب جديد
+            signupModal.style.display = 'none';
+            userDashboard.style.display = 'block';
+            document.querySelector('header').style.display = 'none';
+            document.querySelector('.hero').style.display = 'none';
+            document.querySelector('.features').style.display = 'none';
+            document.querySelector('.subjects').style.display = 'none';
+            document.querySelector('.interactive-section').style.display = 'none';
+            document.querySelector('footer').style.marginTop = '0';
+            
+            // تعيين اسم المستخدم
+            const fullName = document.getElementById('fullName').value;
+            document.getElementById('userWelcome').textContent = `مرحباً، ${fullName}!`;
+        });
+        
+        // تسجيل الخروج
+        logoutBtn.addEventListener('click', () => {
+            userDashboard.style.display = 'none';
+            document.querySelector('header').style.display = 'block';
+            document.querySelector('.hero').style.display = 'block';
+            document.querySelector('.features').style.display = 'block';
+            document.querySelector('.subjects').style.display = 'block';
+            document.querySelector('.interactive-section').style.display = 'block';
+            document.querySelector('footer').style.marginTop = '';
+        });
+        
+        // التنقل في لوحة التحكم
+        dashboardNavButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                dashboardNavButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                // في التطبيق الحقيقي، هنا سيتم تغيير محتوى لوحة التحكم
+            });
+        });
+        
+        // إحصائيات متحركة
+        function animateCounter(element, target, duration) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if (start >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start);
+                }
+            }, 16);
+        }
+        
+        // تشغيل العدادات عند التمرير للقسم
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(document.getElementById('studentsCount'), 1250, 2000);
+                    animateCounter(document.getElementById('coursesCount'), 48, 1500);
+                    animateCounter(document.getElementById('teachersCount'), 32, 1500);
+                    
+                    let rate = 0;
+                    const rateInterval = setInterval(() => {
+                        rate += 1;
+                        document.getElementById('successRate').textContent = `${rate}%`;
+                        if (rate >= 94) clearInterval(rateInterval);
+                    }, 20);
+                    
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(document.querySelector('.interactive-section'));
+        
+        // إضافة تأثيرات للبطاقات عند التمرير
+        const cards = document.querySelectorAll('.feature-card, .subject-card, .course-card');
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        cards.forEach(card => {
+            card.style.opacity = 0;
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s, transform 0.5s';
+            cardObserver.observe(card);
         });
     </script>
 </body>
