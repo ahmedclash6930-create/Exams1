@@ -1,937 +1,858 @@
-# Exams1
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الاختبارات الذكية - Ahmed Hatem Asaad</title>
+    <title>طلاب علوم - منصة التعليم الطلابية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary-blue: #2C3E50;
+            --secondary-green: #27AE60;
+            --accent-orange: #E67E22;
+            --light-bg: #F8F9FA;
+            --text-dark: #2D3748;
+            --text-light: #718096;
+            --white: #FFFFFF;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
         }
-
-        :root {
-            --primary: #3498db;
-            --secondary: #2ecc71;
-            --accent: #e74c3c;
-            --dark: #2c3e50;
-            --light: #ecf0f1;
-        }
-
+        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background-color: var(--light-bg);
+            color: var(--text-dark);
             line-height: 1.6;
-            min-height: 100vh;
-            padding: 20px;
-            direction: rtl;
         }
-
+        
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-            overflow: hidden;
+            padding: 0 20px;
         }
-
-        .header {
-            background: linear-gradient(135deg, var(--dark), #34495e);
-            color: white;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-        }
-
-        .creator-signature {
-            background: linear-gradient(135deg, var(--accent), #c0392b);
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            display: inline-block;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3);
-        }
-
-        .header h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .ai-badge {
-            background: linear-gradient(135deg, #9b59b6, #8e44ad);
-            color: white;
-            padding: 10px 20px;
-            border-radius: 25px;
-            display: inline-block;
-            margin: 10px 0;
-            font-weight: bold;
-        }
-
-        /* Tab Navigation */
-        .tabs {
-            display: flex;
-            background: var(--dark);
-            border-bottom: 3px solid var(--primary);
-        }
-
-        .tab {
-            flex: 1;
-            padding: 20px;
-            text-align: center;
-            background: var(--dark);
-            color: white;
-            border: none;
-            cursor: pointer;
-            font-size: 1.1em;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            border-bottom: 3px solid transparent;
-        }
-
-        .tab.active {
-            background: var(--primary);
-            border-bottom: 3px solid var(--secondary);
-        }
-
-        .tab:hover:not(.disabled) {
-            background: var(--primary);
-        }
-
-        .tab.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: var(--dark) !important;
-        }
-
-        /* Tab Content */
-        .tab-content {
-            display: none;
-            padding: 40px;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        /* Upload Section */
-        .upload-section {
-            background: var(--light);
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
-            border: 3px dashed var(--primary);
-            text-align: center;
-        }
-
-        .upload-area {
-            border: 2px dashed #bdc3c7;
-            border-radius: 10px;
-            padding: 50px;
-            text-align: center;
-            margin: 20px 0;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: white;
-        }
-
-        .upload-area.dragover {
-            border-color: var(--primary);
-            background: #ebf5fb;
-            transform: scale(1.02);
-        }
-
-        .upload-icon {
-            font-size: 4em;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .file-input {
-            display: none;
-        }
-
-        .upload-button {
-            background: var(--primary);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 15px;
-            transition: all 0.3s ease;
-        }
-
-        .upload-button:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        /* Exam Settings */
-        .exam-settings {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--light);
-            margin: 20px 0;
-        }
-
-        .setting-group {
-            margin: 20px 0;
-        }
-
-        .setting-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: var(--dark);
-        }
-
-        .setting-group select, .setting-group input {
+        
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
             width: 100%;
-            padding: 12px;
-            border: 2px solid #bdc3c7;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: all 0.3s ease;
+            top: 0;
+            z-index: 1000;
         }
-
-        .setting-group select:focus, .setting-group input:focus {
-            border-color: var(--primary);
-            outline: none;
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
         }
-
-        .generate-btn {
-            background: linear-gradient(135deg, var(--secondary), #27ae60);
-            color: white;
-            padding: 18px 50px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.3em;
-            font-weight: bold;
-            margin: 30px auto;
-            display: block;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+        
+        .logo {
+            display: flex;
+            align-items: center;
         }
-
-        .generate-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+        
+        .logo i {
+            font-size: 28px;
+            color: var(--secondary-green);
+            margin-left: 10px;
         }
-
-        /* Exam Section */
-        .exam-header {
-            background: linear-gradient(135deg, var(--dark), #34495e);
-            color: white;
-            padding: 30px;
-            text-align: center;
-            border-radius: 15px;
-            margin-bottom: 30px;
+        
+        .logo h1 {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-blue);
         }
-
-        .timer {
-            background: var(--accent);
-            color: white;
+        
+        .logo span {
+            color: var(--secondary-green);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin: 0 15px;
+        }
+        
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--secondary-green);
+        }
+        
+        .auth-buttons {
+            display: flex;
+        }
+        
+        .btn {
             padding: 10px 20px;
-            border-radius: 25px;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 10px 0;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
             display: inline-block;
+            text-align: center;
         }
-
-        .question {
-            background: #f8f9fa;
+        
+        .btn-outline {
+            border: 2px solid var(--secondary-green);
+            color: var(--secondary-green);
+            background: transparent;
+            margin-left: 10px;
+        }
+        
+        .btn-filled {
+            background-color: var(--secondary-green);
+            color: var(--white);
+            border: 2px solid var(--secondary-green);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-green);
+            color: var(--white);
+        }
+        
+        .btn-filled:hover {
+            background-color: #219653;
+            border-color: #219653;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a2530 100%);
+            color: var(--white);
+            padding: 150px 0 100px;
+            margin-top: 70px;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-left: 40px;
+        }
+        
+        .hero-text h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 36px;
+            color: var(--primary-blue);
+            margin-bottom: 15px;
+        }
+        
+        .section-title p {
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: var(--white);
+            border-radius: 10px;
             padding: 30px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 2px solid #e9ecef;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: transform 0.3s;
         }
-
-        .question-number {
-            background: var(--primary);
-            color: white;
-            width: 40px;
-            height: 40px;
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: rgba(39, 174, 96, 0.1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon i {
+            font-size: 30px;
+            color: var(--secondary-green);
+        }
+        
+        .feature-card h3 {
+            font-size: 22px;
             margin-bottom: 15px;
+            color: var(--primary-blue);
         }
-
-        .options {
-            margin: 20px 0;
+        
+        /* Subjects Section */
+        .subjects {
+            padding: 80px 0;
+            background-color: var(--white);
         }
-
-        .option {
-            background: white;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #bdc3c7;
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .subject-card {
+            background: var(--light-bg);
             border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .option:hover {
-            border-color: var(--primary);
-            background: #ebf5fb;
-        }
-
-        .option.selected {
-            border-color: var(--secondary);
-            background: #d5f4e6;
-        }
-
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-
-        .nav-btn {
-            background: var(--primary);
-            color: white;
-            padding: 12px 25px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s ease;
-        }
-
-        .nav-btn:hover {
-            background: #2980b9;
-            transform: translateY(-2px);
-        }
-
-        .nav-btn:disabled {
-            background: #bdc3c7;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, var(--secondary), #27ae60);
-            color: white;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 25px;
-            cursor: pointer;
-            font-size: 1.2em;
-            font-weight: bold;
-            margin: 20px auto;
-            display: block;
-            transition: all 0.3s ease;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #ecf0f1;
-            border-radius: 5px;
-            margin: 20px 0;
             overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
         }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            width: 0%;
-            transition: width 0.3s ease;
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
         }
-
-        /* Notification */
-        .notification {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: var(--secondary);
-            color: white;
-            padding: 15px 25px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: none;
-            z-index: 1000;
-        }
-
-        .notification.error {
-            background: var(--accent);
-        }
-
-        .file-preview {
-            margin: 20px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 10px;
-            display: none;
-        }
-
-        .file-info {
+        
+        .subject-icon {
+            height: 120px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            justify-content: center;
+            color: var(--white);
+            font-size: 50px;
         }
-
-        .file-icon {
-            font-size: 2em;
+        
+        .chemistry .subject-icon {
+            background: linear-gradient(135deg, #8E44AD, #9B59B6);
         }
-
-        .no-exam-message {
+        
+        .physics .subject-icon {
+            background: linear-gradient(135deg, #3498DB, #5DADE2);
+        }
+        
+        .biology .subject-icon {
+            background: linear-gradient(135deg, #27AE60, #58D68D);
+        }
+        
+        .math .subject-icon {
+            background: linear-gradient(135deg, #E67E22, #F39C12);
+        }
+        
+        .subject-content {
+            padding: 20px;
+        }
+        
+        .subject-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+        
+        .subject-content p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+        }
+        
+        /* Teachers Section */
+        .teachers {
+            padding: 80px 0;
+        }
+        
+        .teachers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .teacher-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
             text-align: center;
-            padding: 60px;
-            color: #7f8c8d;
         }
-
-        .no-exam-message .icon {
-            font-size: 4em;
+        
+        .teacher-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .teacher-info {
+            padding: 20px;
+        }
+        
+        .teacher-info h3 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            color: var(--primary-blue);
+        }
+        
+        .teacher-info p {
+            color: var(--text-light);
+            margin-bottom: 10px;
+        }
+        
+        .rating {
+            color: #F1C40F;
+            margin-bottom: 15px;
+        }
+        
+        /* Courses Section */
+        .courses {
+            padding: 80px 0;
+            background-color: var(--white);
+        }
+        
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .course-card {
+            background: var(--light-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        
+        .course-image {
+            height: 180px;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .course-content {
+            padding: 20px;
+        }
+        
+        .course-content h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: var(--primary-blue);
+        }
+        
+        .course-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            color: var(--text-light);
+        }
+        
+        .progress-bar {
+            height: 8px;
+            background: #E0E0E0;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--secondary-green);
+            border-radius: 4px;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 22px;
             margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
         }
-
-        .exam-active {
-            display: block !important;
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--secondary-green);
         }
-
-        .exam-hidden {
-            display: none !important;
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #CBD5E0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--secondary-green);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background: var(--secondary-green);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #CBD5E0;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-left: 0;
+                margin-bottom: 40px;
+                text-align: center;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h2 {
+                font-size: 32px;
+            }
+            
+            .section-title h2 {
+                font-size: 28px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="creator-signature">
-                🎯 منصة الاختبارات الذكية - أحمد حاتم أسعد
-            </div>
-            <h1>اختبارات ذكية مدعومة بالذكاء الاصطناعي</h1>
-            <div class="ai-badge">🤖 مدعوم بواسطة DeepSeek AI</div>
-            <p>ارفع ملفك الدراسي وسأقوم بإنشاء اختبار مخصص لك!</p>
-        </div>
-
-        <!-- Tab Navigation -->
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('upload')">📤 رفع الملف وإنشاء الاختبار</button>
-            <button class="tab disabled" id="examTab" onclick="switchTab('exam')">📝 أداء الاختبار</button>
-        </div>
-
-        <!-- Upload Tab -->
-        <div class="tab-content active" id="uploadTab">
-            <div class="upload-section">
-                <h2>📤 ارفع ملفك الدراسي</h2>
-                <p>يمكنك رفع ملفات PDF، Word، PowerPoint، أو حتى نص عادي</p>
-                
-                <div class="upload-area" id="uploadArea">
-                    <div class="upload-icon">📁</div>
-                    <h3>اسحب الملف هنا أو انقر للاختيار</h3>
-                    <p>يدعم: PDF, DOC, DOCX, PPT, PPTX, TXT</p>
-                    <p style="color: var(--accent); margin-top: 10px;" id="fileInfo">لم يتم اختيار أي ملف</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>طلاب <span>علوم</span></h1>
                 </div>
+                <nav>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">المواد الدراسية</a></li>
+                        <li><a href="#">المدرسون</a></li>
+                        <li><a href="#">الدورات</a></li>
+                        <li><a href="#">المجتمع</a></li>
+                        <li><a href="#">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+                <div class="auth-buttons">
+                    <a href="#" class="btn btn-outline">تسجيل الدخول</a>
+                    <a href="#" class="btn btn-filled">انضم إلينا</a>
+                </div>
+            </div>
+        </div>
+    </header>
 
-                <input type="file" id="fileInput" class="file-input" 
-                       accept=".pdf,.doc,.docx,.ppt,.pptx,.txt,.md">
-
-                <div class="file-preview" id="filePreview">
-                    <div class="file-info">
-                        <div class="file-icon" id="fileIcon">📄</div>
-                        <div>
-                            <div id="fileName" style="font-weight: bold;"></div>
-                            <div id="fileSize" style="color: #7f8c8d;"></div>
-                        </div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2>منصة طلابية تشاركية لتعليم المواد العلمية</h2>
+                    <p>بالعلم نرتقي.. وبالتعاون ننتصر. انضم إلى آلاف الطلاب الذين يحققون تفوقهم الأكاديمي من خلال منصتنا التعليمية المبتكرة.</p>
+                    <div class="hero-buttons">
+                        <a href="#" class="btn btn-filled">ابدأ رحلتك التعليمية</a>
+                        <a href="#" class="btn btn-outline">استكشف المواد الدراسية</a>
                     </div>
                 </div>
-
-                <button class="upload-button" onclick="processFile()">
-                    📝 معالجة الملف بواسطة الذكاء الاصطناعي
-                </button>
-            </div>
-
-            <div class="exam-settings">
-                <h2>⚙️ إعدادات الاختبار</h2>
-                
-                <div class="setting-group">
-                    <label>📊 نوع الاختبار:</label>
-                    <select id="examType">
-                        <option value="mcq">اختيار من متعدد</option>
-                        <option value="truefalse">صح أم خطأ</option>
-                        <option value="mixed">مختلط</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>🔢 عدد الأسئلة:</label>
-                    <select id="questionCount">
-                        <option value="5">5 أسئلة</option>
-                        <option value="10" selected>10 أسئلة</option>
-                        <option value="15">15 أسئلة</option>
-                        <option value="20">20 أسئلة</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>⏱️ وقت الاختبار (دقائق):</label>
-                    <select id="examTime">
-                        <option value="10">10 دقائق</option>
-                        <option value="20">20 دقائق</option>
-                        <option value="30" selected>30 دقائق</option>
-                        <option value="45">45 دقائق</option>
-                        <option value="60">60 دقائق</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>🎯 مستوى الصعوبة:</label>
-                    <select id="difficulty">
-                        <option value="easy">سهل</option>
-                        <option value="medium" selected>متوسط</option>
-                        <option value="hard">صعب</option>
-                    </select>
-                </div>
-
-                <div class="setting-group">
-                    <label>📚 التركيز على:</label>
-                    <input type="text" id="focusArea" placeholder="مثال: التفاضل، الكيمياء العضوية، التاريخ الإسلامي...">
+                <div class="hero-image">
+                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="طلاب يدرسون معًا">
                 </div>
             </div>
-
-            <button class="generate-btn" onclick="generateExam()">
-                🚀 إنشاء الاختبار الذكي
-            </button>
         </div>
+    </section>
 
-        <!-- Exam Tab -->
-        <div class="tab-content" id="examTab">
-            <div class="exam-header">
-                <h1>📝 الاختبار الذكي</h1>
-                <div class="timer" id="timer">⏱️ --:--</div>
-                <p id="examInfo">لم يتم إنشاء اختبار بعد</p>
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>لماذا تختار منصة طلاب علوم؟</h2>
+                <p>نقدم تجربة تعليمية فريدة تجمع بين الجودة العالية والأسعار المناسبة</p>
             </div>
-
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-
-            <div id="questionsContainer">
-                <div class="no-exam-message">
-                    <div class="icon">📝</div>
-                    <h3>لا يوجد اختبار جاهز بعد</h3>
-                    <p>يرجى العودة إلى تبويب "رفع الملف" وإنشاء اختبار أولاً</p>
-                    <button class="upload-button" onclick="switchTab('upload')" style="margin-top: 20px;">
-                        العودة لإنشاء الاختبار
-                    </button>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>شرح بلغة طلابية</h3>
+                    <p>مدرسون من خريجي كليات القمة يشرحون بلغة بسيطة وسهلة الفهم</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>أسعار مناسبة</h3>
+                    <p>أسعارنا تبدأ من 50% أقل من المنصات التجارية الأخرى</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>مدرسون متميزون</h3>
+                    <p>فريق من الطلاب المتفوقين والخريجين من كليات الطب والهندسة والعلوم</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h3>مراجعات نهائية مجانية</h3>
+                    <p>نوفر مراجعات نهائية مجانية قبل الامتحانات لجميع الطلاب</p>
                 </div>
             </div>
-
-            <div class="navigation exam-hidden" id="examNavigation">
-                <button class="nav-btn" id="prevBtn" onclick="previousQuestion()">السابق</button>
-                <button class="nav-btn" id="nextBtn" onclick="nextQuestion()">التالي</button>
-            </div>
-
-            <button class="submit-btn exam-hidden" onclick="submitExam()" id="submitBtn">✅ إنهاء الاختبار</button>
         </div>
-    </div>
+    </section>
 
-    <div class="notification" id="notification"></div>
+    <!-- Subjects Section -->
+    <section class="subjects">
+        <div class="container">
+            <div class="section-title">
+                <h2>المواد الدراسية</h2>
+                <p>نغطي جميع المواد العلمية الأساسية بمحتوى تعليمي متكامل</p>
+            </div>
+            <div class="subjects-grid">
+                <div class="subject-card chemistry">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>الكيمياء</h3>
+                        <p>شرح منهج الكيمياء بجميع فروعه من الصفر إلى الاحتراف</p>
+                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
+                    </div>
+                </div>
+                <div class="subject-card physics">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>الفيزياء</h3>
+                        <p>فهم قوانين الفيزياء وتطبيقاتها العملية في الحياة اليومية</p>
+                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
+                    </div>
+                </div>
+                <div class="subject-card biology">
+                    <div class="subject-icon">
+                        <i class="fas fa-dna"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>الأحياء</h3>
+                        <p>دراسة الكائنات الحية ووظائفها من الخلية إلى الأنظمة البيئية</p>
+                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
+                    </div>
+                </div>
+                <div class="subject-card math">
+                    <div class="subject-icon">
+                        <i class="fas fa-square-root-alt"></i>
+                    </div>
+                    <div class="subject-content">
+                        <h3>الرياضيات</h3>
+                        <p>تطوير مهارات حل المسائل الرياضية بمختلف أنواعها</p>
+                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teachers Section -->
+    <section class="teachers">
+        <div class="container">
+            <div class="section-title">
+                <h2>مدرسون متميزون</h2>
+                <p>تعلم من أفضل الطلاب والخريجين المتفوقين في تخصصاتهم</p>
+            </div>
+            <div class="teachers-grid">
+                <div class="teacher-card">
+                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="teacher-info">
+                        <h3>أحمد محمد</h3>
+                        <p>خريج كلية الطب - متخصص في الكيمياء</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p>عدد الطلاب: 350+</p>
+                    </div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="teacher-info">
+                        <h3>سارة أحمد</h3>
+                        <p>طالبة صيدلة - متخصصة في الأحياء</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>عدد الطلاب: 280+</p>
+                    </div>
+                </div>
+                <div class="teacher-card">
+                    <div class="teacher-image" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="teacher-info">
+                        <h3>يوسف خالد</h3>
+                        <p>خريج هندسة - متخصص في الفيزياء</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <p>عدد الطلاب: 420+</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses">
+        <div class="container">
+            <div class="section-title">
+                <h2>الدورات الأكثر شيوعًا</h2>
+                <p>انضم إلى آلاف الطلاب الذين يستفيدون من دوراتنا التعليمية</p>
+            </div>
+            <div class="courses-grid">
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1532094349884-543bc11b234d?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="course-content">
+                        <h3>الكيمياء العضوية المتقدمة</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 24 ساعة</span>
+                            <span><i class="far fa-user"></i> 340 طالب</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 75%;"></div>
+                        </div>
+                        <p>شامل لجميع أساسيات الكيمياء العضوية وتطبيقاتها</p>
+                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="course-content">
+                        <h3>الفيزياء الحديثة</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 18 ساعة</span>
+                            <span><i class="far fa-user"></i> 290 طالب</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 40%;"></div>
+                        </div>
+                        <p>استكشاف النظريات الفيزيائية الحديثة وتطبيقاتها</p>
+                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
+                    </div>
+                </div>
+                <div class="course-card">
+                    <div class="course-image" style="background-image: url('https://images.unsplash.com/photo-1536922246289-88c42f957773?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80');"></div>
+                    <div class="course-content">
+                        <h3>الوراثة والأحياء الجزيئية</h3>
+                        <div class="course-meta">
+                            <span><i class="far fa-clock"></i> 30 ساعة</span>
+                            <span><i class="far fa-user"></i> 510 طالب</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 90%;"></div>
+                        </div>
+                        <p>فهم أساسيات الوراثة وتطبيقاتها في العلوم الطبية</p>
+                        <a href="#" class="btn btn-filled">استمر في التعلم</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>طلاب علوم</h3>
+                    <p>منصة طلابية تشاركية لتعليم المواد العلمية، نهدف إلى تقديم تعليم عالي الجودة بأسعار مناسبة للجميع.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#">الرئيسية</a></li>
+                        <li><a href="#">من نحن</a></li>
+                        <li><a href="#">المواد الدراسية</a></li>
+                        <li><a href="#">المدرسون</a></li>
+                        <li><a href="#">المدونة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>المواد الدراسية</h3>
+                    <ul>
+                        <li><a href="#">الكيمياء</a></li>
+                        <li><a href="#">الفيزياء</a></li>
+                        <li><a href="#">الأحياء</a></li>
+                        <li><a href="#">الرياضيات</a></li>
+                        <li><a href="#">المسارات المتقدمة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</li>
+                        <li><i class="fas fa-phone"></i> +20 123 456 7890</li>
+                        <li><i class="fas fa-envelope"></i> info@tullab-ulum.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2023 منصة طلاب علوم</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        // البيانات المشتركة
-        let currentFile = null;
-        let examQuestions = [];
-        let currentQuestion = 0;
-        let userAnswers = [];
-        let timeLeft = 0;
-        let timerInterval;
-        let examGenerated = false;
-
-        // عناصر DOM
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const filePreview = document.getElementById('filePreview');
-        const fileName = document.getElementById('fileName');
-        const fileSize = document.getElementById('fileSize');
-        const fileIcon = document.getElementById('fileIcon');
-        const fileInfo = document.getElementById('fileInfo');
-        const notification = document.getElementById('notification');
-        const examTab = document.getElementById('examTab');
-        const examInfo = document.getElementById('examInfo');
-        const examNavigation = document.getElementById('examNavigation');
-        const submitBtn = document.getElementById('submitBtn');
-        const questionsContainer = document.getElementById('questionsContainer');
-
-        // دوال التبويب
-        function switchTab(tabName) {
-            // إخفاء كل المحتويات
-            document.querySelectorAll('.tab-content').forEach(tab => {
-                tab.classList.remove('active');
-            });
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation to feature cards on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
             
-            // إلغاء تفعيل كل الأزرار
-            document.querySelectorAll('.tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            
-            // إظهار المحتوى المطلوب
-            document.getElementById(tabName + 'Tab').classList.add('active');
-            
-            // تفعيل الزر المطلوب
-            document.querySelector(`.tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
-
-            // إذا كان التبويب هو الاختبار وكان هناك اختبار مولد، عرضه
-            if (tabName === 'exam' && examGenerated) {
-                startExam(); // ✅ هذا هو التصحيح المهم
-            }
-        }
-
-        // أحداث سحب وإفلات الملفات
-        uploadArea.addEventListener('click', () => fileInput.click());
-        
-        uploadArea.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadArea.classList.add('dragover');
-        });
-
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
-        });
-
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            fileInput.files = e.dataTransfer.files;
-            handleFileSelect();
-        });
-
-        fileInput.addEventListener('change', handleFileSelect);
-
-        function handleFileSelect() {
-            const file = fileInput.files[0];
-            if (!file) return;
-
-            currentFile = file;
-            
-            // عرض معلومات الملف
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileInfo.textContent = `تم اختيار: ${file.name}`;
-            fileInfo.style.color = '#27ae60';
-            
-            // تعيين الأيقونة المناسبة
-            const icon = getFileIcon(file.name);
-            fileIcon.textContent = icon;
-            
-            filePreview.style.display = 'block';
-            
-            showNotification('تم تحميل الملف بنجاح!');
-        }
-
-        function processFile() {
-            if (!currentFile) {
-                showNotification('يرجى اختيار ملف أولاً', 'error');
-                return;
-            }
-
-            showNotification('🤖 جاري تحليل الملف بواسطة الذكاء الاصطناعي...');
-
-            // محاكاة معالجة الملف
-            setTimeout(() => {
-                showNotification('تم تحليل الملف بنجاح! يمكنك الآن إنشاء الاختبار');
-            }, 2000);
-        }
-
-        function generateExam() {
-            if (!currentFile) {
-                showNotification('يرجى رفع ملف أولاً', 'error');
-                return;
-            }
-
-            const examType = document.getElementById('examType').value;
-            const questionCount = parseInt(document.getElementById('questionCount').value);
-            const examTime = parseInt(document.getElementById('examTime').value);
-            const difficulty = document.getElementById('difficulty').value;
-            const focusArea = document.getElementById('focusArea').value;
-
-            showNotification('🤖 جاري إنشاء الاختبار الذكي...');
-
-            // محاكاة إنشاء الأسئلة بواسطة الذكاء الاصطناعي
-            setTimeout(() => {
-                // توليد أسئلة مثال
-                examQuestions = generateSampleQuestions(questionCount);
-                timeLeft = examTime * 60;
-                
-                // تمكين تبويب الاختبار
-                examTab.classList.remove('disabled');
-                examTab.disabled = false;
-                
-                // تعيين علامة أن الاختبار تم إنشاؤه
-                examGenerated = true;
-                
-                // تحديث معلومات الاختبار
-                examInfo.textContent = `تم إنشاء اختبار ${questionCount} أسئلة - ${examTime} دقيقة - مستوى ${difficulty}`;
-                
-                showNotification(`✅ تم إنشاء الاختبار بنجاح! ${questionCount} أسئلة جاهزة`);
-                
-                // الانتقال تلقائياً لتبويب الاختبار
-                switchTab('exam');
-                
-            }, 2000);
-        }
-
-        function generateSampleQuestions(count) {
-            const questions = [];
-            const topics = ['الرياضيات', 'الفيزياء', 'الكيمياء', 'الأحياء', 'التاريخ', 'الجغرافيا'];
-            const questionTexts = {
-                'الرياضيات': [
-                    'ما هو ناتج جمع 15 + 27؟',
-                    'ما هو محيط الدائرة التي نصف قطرها 7 سم؟',
-                    'ما هو حل المعادلة: 2س + 5 = 15؟',
-                    'ما هو مساحة المربع الذي طول ضلعه 5 سم؟',
-                    'ما هو الجذر التربيعي للعدد 64؟'
-                ],
-                'الفيزياء': [
-                    'ما هي وحدة قياس القوة في النظام الدولي؟',
-                    'ما هو قانون نيوتن الأول؟',
-                    'كيف تحسب السرعة المتوسطة؟',
-                    'ما هي أنواع الطاقة؟',
-                    'ما هو الفرق بين الكتلة والوزن؟'
-                ],
-                'الكيمياء': [
-                    'ما هو الرمز الكيميائي للذهب؟',
-                    'ما هو عدد الإلكترونات في ذرة الأكسجين؟',
-                    'ما هو الغاز النبيل الأكثر انتشاراً في الغلاف الجوي؟',
-                    'ما هو الرقم الهيدروجيني للماء النقي؟',
-                    'ما هي أنواع الروابط الكيميائية؟'
-                ],
-                'الأحياء': [
-                    'ما هو العضو المسؤول عن ضخ الدم في الجسم؟',
-                    'ما هي عملية البناء الضوئي؟',
-                    'كم عدد الكروموسومات في الإنسان؟',
-                    'ما هو الفرق بين الخلية النباتية والحيوانية؟',
-                    'ما هي وظيفة الميتوكوندريا؟'
-                ]
-            };
-            
-            for (let i = 0; i < count; i++) {
-                const topic = topics[Math.floor(Math.random() * topics.length)];
-                const questionList = questionTexts[topic] || ['ما هو ...؟'];
-                const questionText = questionList[Math.floor(Math.random() * questionList.length)];
-                
-                // إنشاء خيارات متنوعة
-                const options = [
-                    'الإجابة الصحيحة',
-                    'إجابة خاطئة 1',
-                    'إجابة خاطئة 2', 
-                    'إجابة خاطئة 3'
-                ];
-                
-                // خلط الخيارات عشوائياً
-                for (let j = options.length - 1; j > 0; j--) {
-                    const k = Math.floor(Math.random() * (j + 1));
-                    [options[j], options[k]] = [options[k], options[j]];
-                }
-                
-                questions.push({
-                    id: i + 1,
-                    question: `سؤال ${i + 1}: ${questionText}`,
-                    type: Math.random() > 0.3 ? 'mcq' : 'truefalse',
-                    options: options,
-                    correctAnswer: options.indexOf('الإجابة الصحيحة'),
-                    explanation: `شرح الإجابة الصحيحة للسؤال ${i + 1}`
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
                 });
-            }
-            return questions;
-        }
-
-        // ✅ دوال الاختبار - هذه هي الدوال الأساسية
-        function startExam() {
-            console.log('بدء الاختبار - عدد الأسئلة:', examQuestions.length); // للتتبع
-            currentQuestion = 0;
-            userAnswers = new Array(examQuestions.length).fill(null);
+            }, { threshold: 0.1 });
             
-            // إظهار عناصر التحكم
-            examNavigation.classList.remove('exam-hidden');
-            examNavigation.classList.add('exam-active');
-            submitBtn.classList.remove('exam-hidden');
-            submitBtn.classList.add('exam-active');
-            
-            startTimer();
-            displayQuestion();
-        }
-
-        function startTimer() {
-            clearInterval(timerInterval);
-            updateTimer(); // التحديث الأولي
-            
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimer();
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    submitExam();
-                }
-            }, 1000);
-        }
-
-        function updateTimer() {
-            const minutes = Math.floor(timeLeft / 60);
-            const seconds = timeLeft % 60;
-            document.getElementById('timer').textContent = 
-                `⏱️ ${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        }
-
-        function displayQuestion() {
-            console.log('عرض السؤال:', currentQuestion + 1); // للتتبع
-            
-            if (!examGenerated || examQuestions.length === 0) {
-                questionsContainer.innerHTML = `
-                    <div class="no-exam-message">
-                        <div class="icon">📝</div>
-                        <h3>لا يوجد اختبار جاهز بعد</h3>
-                        <p>يرجى العودة إلى تبويب "رفع الملف" وإنشاء اختبار أولاً</p>
-                        <button class="upload-button" onclick="switchTab('upload')" style="margin-top: 20px;">
-                            العودة لإنشاء الاختبار
-                        </button>
-                    </div>
-                `;
-                return;
-            }
-
-            const question = examQuestions[currentQuestion];
-            
-            let questionHTML = `
-                <div class="question">
-                    <div class="question-number">${currentQuestion + 1}</div>
-                    <h3>${question.question}</h3>
-                    <div class="options">
-            `;
-
-            if (question.type === 'mcq') {
-                question.options.forEach((option, index) => {
-                    const isSelected = userAnswers[currentQuestion] === index;
-                    questionHTML += `
-                        <div class="option ${isSelected ? 'selected' : ''}" 
-                             onclick="selectAnswer(${index})">
-                            ${String.fromCharCode(1570 + index)}) ${option}
-                        </div>
-                    `;
-                });
-            } else if (question.type === 'truefalse') {
-                questionHTML += `
-                    <div class="option ${userAnswers[currentQuestion] === true ? 'selected' : ''}" 
-                         onclick="selectAnswer(true)">
-                        ✅ صح
-                    </div>
-                    <div class="option ${userAnswers[currentQuestion] === false ? 'selected' : ''}" 
-                         onclick="selectAnswer(false)">
-                        ❌ خطأ
-                    </div>
-                `;
-            }
-
-            questionHTML += `</div></div>`;
-            questionsContainer.innerHTML = questionHTML;
-            
-            updateProgress();
-            updateNavigation();
-        }
-
-        function selectAnswer(answer) {
-            userAnswers[currentQuestion] = answer;
-            displayQuestion();
-        }
-
-        function nextQuestion() {
-            if (currentQuestion < examQuestions.length - 1) {
-                currentQuestion++;
-                displayQuestion();
-            }
-        }
-
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                displayQuestion();
-            }
-        }
-
-        function updateProgress() {
-            const progress = ((currentQuestion + 1) / examQuestions.length) * 100;
-            document.getElementById('progressFill').style.width = progress + '%';
-        }
-
-        function updateNavigation() {
-            document.getElementById('prevBtn').disabled = currentQuestion === 0;
-            document.getElementById('nextBtn').disabled = currentQuestion === examQuestions.length - 1;
-        }
-
-        function submitExam() {
-            clearInterval(timerInterval);
-            
-            // حساب النتيجة
-            let score = 0;
-            examQuestions.forEach((question, index) => {
-                if (userAnswers[index] === question.correctAnswer) {
-                    score++;
-                }
+            featureCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.5s, transform 0.5s';
+                observer.observe(card);
             });
-
-            const percentage = (score / examQuestions.length) * 100;
-            const timeSpent = Math.round((parseInt(document.getElementById('examTime').value) * 60 - timeLeft) / 60);
-            
-            showNotification(`🎉 تم إنهاء الاختبار! نتيجتك: ${score}/${examQuestions.length} (${Math.round(percentage)}%)`);
-            
-            // عرض النتائج في نافذة منبثقة
-            setTimeout(() => {
-                alert(`🎊 نتيجة الاختبار:\n\n✅ الإجابات الصحيحة: ${score}\n❌ الإجابات الخاطئة: ${examQuestions.length - score}\n📊 النسبة: ${Math.round(percentage)}%\n⏱️ الوقت المستغرق: ${timeSpent} دقيقة\n\n💡 يمكنك إنشاء اختبار جديد من تبويب رفع الملف`);
-            }, 1000);
-        }
-
-        // دوال مساعدة
-        function getFileIcon(filename) {
-            const ext = filename.split('.').pop().toLowerCase();
-            const icons = {
-                pdf: '📕',
-                doc: '📘', docx: '📘',
-                ppt: '📊', pptx: '📊',
-                txt: '📄', md: '📄'
-            };
-            return icons[ext] || '📄';
-        }
-
-        function formatFileSize(bytes) {
-            if (bytes < 1024) return bytes + ' Bytes';
-            else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
-            else return (bytes / 1048576).toFixed(1) + ' MB';
-        }
-
-        function showNotification(message, type = 'success') {
-            notification.textContent = message;
-            notification.className = 'notification ' + (type === 'error' ? 'error' : '');
-            notification.style.display = 'block';
-            
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 4000);
-        }
+        });
     </script>
 </body>
 </html>
