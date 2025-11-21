@@ -3,1226 +3,1220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>طلاب علوم - المنصة التعليمية المتكاملة</title>
+    <title>قراصنة الدراسة - نظام الجدولة المتقدم</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800&display=swap');
+        
         :root {
-            --primary-blue: #2C3E50;
-            --secondary-green: #27AE60;
-            --accent-orange: #E67E22;
-            --light-bg: #F8F9FA;
-            --text-dark: #2D3748;
-            --text-light: #718096;
-            --white: #FFFFFF;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
+            --straw-hat: #FF6B00;
+            --navy-blue: #00308F;
+            --gold: #FFD700;
+            --red: #DC2626;
+            --sea: #00B4D8;
+            --green: #10B981;
+            --purple: #8B5CF6;
+            --pink: #EC4899;
+            --cyan: #06D6A0;
         }
         
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Tajawal', sans-serif;
+            font-family: 'Cairo', sans-serif;
         }
         
         body {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-            line-height: 1.6;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
         
         .container {
-            width: 100%;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 20px;
         }
         
-        /* Header Styles */
+        /* الهيدر المتحرك */
         header {
-            background-color: var(--white);
-            box-shadow: var(--shadow);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-        
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 0;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo i {
-            font-size: 28px;
-            color: var(--secondary-green);
-            margin-left: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 24px;
-            font-weight: 800;
-            color: var(--primary-blue);
-        }
-        
-        .logo span {
-            color: var(--secondary-green);
-        }
-        
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-        
-        nav ul li {
-            margin: 0 15px;
-        }
-        
-        nav ul li a {
-            text-decoration: none;
-            color: var(--text-dark);
-            font-weight: 500;
-            transition: var(--transition);
-        }
-        
-        nav ul li a:hover {
-            color: var(--secondary-green);
-        }
-        
-        .auth-buttons {
-            display: flex;
-        }
-        
-        .btn {
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            text-decoration: none;
-            display: inline-block;
             text-align: center;
-            border: none;
-        }
-        
-        .btn-outline {
-            border: 2px solid var(--secondary-green);
-            color: var(--secondary-green);
-            background: transparent;
-            margin-left: 10px;
-        }
-        
-        .btn-filled {
-            background-color: var(--secondary-green);
-            color: var(--white);
-            border: 2px solid var(--secondary-green);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--secondary-green);
-            color: var(--white);
-        }
-        
-        .btn-filled:hover {
-            background-color: #219653;
-            border-color: #219653;
-        }
-        
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a2530 100%);
-            color: var(--white);
-            padding: 150px 0 100px;
-            margin-top: 70px;
-        }
-        
-        .hero-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        
-        .hero-text {
-            flex: 1;
-            padding-left: 40px;
-        }
-        
-        .hero-text h2 {
-            font-size: 42px;
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        
-        .hero-text p {
-            font-size: 18px;
+            padding: 30px;
+            background: rgba(0, 48, 143, 0.9);
+            border-radius: 20px;
             margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-        }
-        
-        .hero-image {
-            flex: 1;
-            text-align: center;
-        }
-        
-        .hero-image img {
-            max-width: 100%;
-            border-radius: 10px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        /* Features Section */
-        .features {
-            padding: 80px 0;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-        
-        .section-title h2 {
-            font-size: 36px;
-            color: var(--primary-blue);
-            margin-bottom: 15px;
-        }
-        
-        .section-title p {
-            color: var(--text-light);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .feature-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            transition: var(--transition);
-        }
-        
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-        
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: rgba(39, 174, 96, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-        }
-        
-        .feature-icon i {
-            font-size: 30px;
-            color: var(--secondary-green);
-        }
-        
-        .feature-card h3 {
-            font-size: 22px;
-            margin-bottom: 15px;
-            color: var(--primary-blue);
-        }
-        
-        /* Subjects Section */
-        .subjects {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-        
-        .subjects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 25px;
-        }
-        
-        .subject-card {
-            background: var(--light-bg);
-            border-radius: 10px;
+            border: 4px solid var(--gold);
+            position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .subject-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .subject-icon {
-            height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 50px;
-        }
-        
-        .chemistry .subject-icon {
-            background: linear-gradient(135deg, #8E44AD, #9B59B6);
-        }
-        
-        .physics .subject-icon {
-            background: linear-gradient(135deg, #3498DB, #5DADE2);
-        }
-        
-        .biology .subject-icon {
-            background: linear-gradient(135deg, #27AE60, #58D68D);
-        }
-        
-        .math .subject-icon {
-            background: linear-gradient(135deg, #E67E22, #F39C12);
-        }
-        
-        .subject-content {
-            padding: 20px;
-        }
-        
-        .subject-content h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: var(--primary-blue);
-        }
-        
-        .subject-content p {
-            color: var(--text-light);
-            margin-bottom: 15px;
-        }
-        
-        /* Teachers Section */
-        .teachers {
-            padding: 80px 0;
-        }
-        
-        .teachers-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-        }
-        
-        .teacher-card {
-            background: var(--white);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-        
-        .teacher-image {
-            height: 200px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .teacher-info {
-            padding: 20px;
-        }
-        
-        .teacher-info h3 {
-            font-size: 22px;
-            margin-bottom: 5px;
-            color: var(--primary-blue);
-        }
-        
-        .teacher-info p {
-            color: var(--text-light);
-            margin-bottom: 10px;
-        }
-        
-        .rating {
-            color: #F1C40F;
-            margin-bottom: 15px;
-        }
-        
-        /* Courses Section */
-        .courses {
-            padding: 80px 0;
-            background-color: var(--white);
-        }
-        
-        .courses-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .course-card {
-            background: var(--light-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-        
-        .course-card:hover {
-            transform: translateY(-5px);
-        }
-        
-        .course-image {
-            height: 180px;
-            background-size: cover;
-            background-position: center;
-        }
-        
-        .course-content {
-            padding: 20px;
-        }
-        
-        .course-content h3 {
-            font-size: 22px;
-            margin-bottom: 10px;
-            color: var(--primary-blue);
-        }
-        
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            color: var(--text-light);
-        }
-        
-        .progress-bar {
-            height: 8px;
-            background: #E0E0E0;
-            border-radius: 4px;
-            margin-bottom: 15px;
-            overflow: hidden;
-        }
-        
-        .progress {
-            height: 100%;
-            background: var(--secondary-green);
-            border-radius: 4px;
-        }
-        
-        /* Interactive Elements */
-        .interactive-section {
-            padding: 80px 0;
-            background: linear-gradient(135deg, var(--primary-blue) 0%, #1a2530 100%);
-            color: var(--white);
-            text-align: center;
-        }
-        
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
-        
-        .stat-item {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
             backdrop-filter: blur(10px);
+            animation: headerGlow 3s ease-in-out infinite alternate;
         }
         
-        .stat-number {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: var(--secondary-green);
+        @keyframes headerGlow {
+            from { box-shadow: 0 15px 35px rgba(0,0,0,0.3); }
+            to { box-shadow: 0 15px 45px rgba(255,215,0,0.4); }
         }
         
-        /* Login Modal */
-        .modal {
-            display: none;
-            position: fixed;
+        .header-bg {
+            position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 2000;
-            align-items: center;
-            justify-content: center;
+            opacity: 0.1;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text x="50%" y="50%" font-size="30" fill="%23FFD700">🏴‍☠️</text></svg>');
         }
         
-        .modal-content {
-            background: var(--white);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        h1 {
+            font-size: 3.5em;
+            color: var(--gold);
+            text-shadow: 4px 4px 0 var(--red);
+            margin-bottom: 10px;
+            position: relative;
+            animation: bounce 2s infinite;
         }
         
-        .modal-header {
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .subtitle {
+            font-size: 1.4em;
+            color: white;
+            margin-bottom: 15px;
+            font-weight: 300;
+        }
+        
+        /* التبويبات */
+        .tabs {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
         }
         
-        .close-modal {
-            background: none;
+        .tab-btn {
+            padding: 15px 30px;
+            background: rgba(255,255,255,0.2);
             border: none;
-            font-size: 24px;
+            border-radius: 50px;
+            color: white;
+            font-size: 1.1em;
             cursor: pointer;
-            color: var(--text-light);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
         }
         
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-group input {
+        .tab-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
         }
         
-        /* User Dashboard */
-        .dashboard {
-            display: none;
-            margin-top: 80px;
-            padding: 40px 0;
+        .tab-btn:hover::before {
+            left: 100%;
         }
         
-        .dashboard-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
+        .tab-btn.active {
+            background: var(--gold);
+            color: var(--navy-blue);
+            border-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,215,0,0.4);
         }
         
-        .user-info {
-            display: flex;
-            align-items: center;
+        .tab-btn:hover:not(.active) {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
         }
         
-        .user-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--secondary-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            font-size: 24px;
-            margin-left: 15px;
-        }
-        
-        .dashboard-nav {
-            display: flex;
-            margin-bottom: 30px;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .dashboard-nav button {
-            padding: 12px 20px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            border-bottom: 3px solid transparent;
-            transition: var(--transition);
-        }
-        
-        .dashboard-nav button.active {
-            border-bottom: 3px solid var(--secondary-green);
-            color: var(--secondary-green);
-        }
-        
-        .dashboard-content {
+        /* المحتوى الرئيسي */
+        .main-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr;
             gap: 30px;
-        }
-        
-        .my-courses, .progress-tracker, .upcoming-classes {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-        }
-        
-        .course-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 0;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .course-item:last-child {
-            border-bottom: none;
-        }
-        
-        .course-thumb {
-            width: 80px;
-            height: 60px;
-            background: #ddd;
-            border-radius: 5px;
-            margin-left: 15px;
-        }
-        
-        /* Footer */
-        footer {
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 60px 0 30px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
             margin-bottom: 40px;
         }
         
-        .footer-column h3 {
-            font-size: 22px;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
+        .section-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 3px solid;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.6s ease-out;
         }
         
-        .footer-column h3::after {
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .section-card:hover {
+            transform: translateY(-5px) scale(1.02);
+        }
+        
+        .upload-section {
+            border-color: var(--sea);
+        }
+        
+        .schedule-section {
+            border-color: var(--green);
+        }
+        
+        .section-title {
+            font-size: 1.8em;
+            color: var(--navy-blue);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            color: var(--straw-hat);
+            animation: spin 3s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* منطقة رفع الملفات */
+        .upload-area {
+            border: 3px dashed var(--sea);
+            border-radius: 15px;
+            padding: 40px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+            background: rgba(0, 180, 216, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .upload-area::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--secondary-green);
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
         }
         
-        .footer-column ul {
-            list-style: none;
+        .upload-area:hover::after {
+            transform: rotate(45deg) translate(50%, 50%);
         }
         
-        .footer-column ul li {
-            margin-bottom: 10px;
+        .upload-area:hover {
+            background: rgba(0, 180, 216, 0.1);
+            border-color: var(--cyan);
+            transform: scale(1.02);
         }
         
-        .footer-column ul li a {
-            color: #CBD5E0;
-            text-decoration: none;
-            transition: var(--transition);
+        .upload-area.dragover {
+            background: rgba(0, 180, 216, 0.2);
+            border-color: var(--cyan);
+            transform: scale(1.05);
         }
         
-        .footer-column ul li a:hover {
-            color: var(--secondary-green);
+        .upload-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+            color: var(--sea);
+            animation: float 3s ease-in-out infinite;
         }
         
-        .social-icons {
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        /* إدخال المواد يدوياً */
+        .manual-input {
+            margin-top: 25px;
+        }
+        
+        .input-group {
             display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .input-group input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--sea);
+            box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+            transform: scale(1.02);
+        }
+        
+        .add-btn {
+            padding: 12px 20px;
+            background: var(--green);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .add-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            transition: all 0.3s;
+            transform: translate(-50%, -50%);
+        }
+        
+        .add-btn:active::before {
+            width: 100px;
+            height: 100px;
+        }
+        
+        .add-btn:hover {
+            background: #059669;
+            transform: scale(1.05);
+        }
+        
+        /* قائمة المواد */
+        .subjects-list {
+            margin-top: 20px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .subject-item {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 4px solid var(--straw-hat);
+            transition: all 0.3s ease;
+            animation: slideInRight 0.3s ease-out;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .subject-item:hover {
+            transform: translateX(5px) scale(1.02);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .subject-actions {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .delete-btn {
+            background: var(--red);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .delete-btn:hover {
+            background: #b91c1c;
+            transform: scale(1.1) rotate(90deg);
+        }
+        
+        /* إعدادات الجدول */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--navy-blue);
+            font-weight: 600;
+        }
+        
+        input, select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--sea);
+            box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.1);
+            transform: scale(1.02);
+        }
+        
+        /* أزرار العمل */
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        
+        .btn {
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--straw-hat), var(--red));
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, var(--navy-blue), var(--purple));
+            color: white;
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, var(--green), var(--cyan));
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* عرض الجدول */
+        .schedule-display {
+            margin-top: 20px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            border: 2px solid #e2e8f0;
+            position: relative;
+        }
+        
+        .schedule-display.loading::after {
+            content: '⚡ يتم إنشاء الجدول...';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2em;
+            color: var(--sea);
+        }
+        
+        .day-schedule {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 15px 0;
+            padding: 20px;
+            border-radius: 15px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border-left: 5px solid var(--gold);
+            animation: zoomIn 0.5s ease-out;
+        }
+        
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .day-header {
+            color: var(--gold);
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3em;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .schedule-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 12px 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            border-right: 3px solid;
+            transition: all 0.3s ease;
+            animation: slideInLeft 0.4s ease-out;
+        }
+        
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .schedule-item:hover {
+            transform: translateX(5px) scale(1.02);
+            background: rgba(255, 255, 255, 0.25);
+        }
+        
+        .schedule-item.study {
+            border-right-color: var(--cyan);
+        }
+        
+        .schedule-item.break {
+            border-right-color: var(--gold);
+            background: rgba(255, 215, 0, 0.2);
+        }
+        
+        .time-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .schedule-item:hover .time-badge {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+        
+        /* أزرار التحميل */
+        .download-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-top: 20px;
         }
         
-        .social-icons a {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--white);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        .social-icons a:hover {
-            background: var(--secondary-green);
-            transform: translateY(-3px);
-        }
-        
-        .copyright {
+        .empty-state {
             text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #CBD5E0;
+            padding: 60px 20px;
+            color: #6b7280;
+            animation: pulse 2s infinite;
         }
         
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .hero-content {
-                flex-direction: column;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 15px;
+            color: #d1d5db;
+        }
+        
+        /* التكيف مع الشاشات الصغيرة */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
             }
             
-            .hero-text {
-                padding-left: 0;
-                margin-bottom: 40px;
-                text-align: center;
+            .settings-grid {
+                grid-template-columns: 1fr;
             }
             
-            .dashboard-content {
+            .action-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .download-section {
                 grid-template-columns: 1fr;
             }
         }
         
         @media (max-width: 768px) {
-            .hero-text h2 {
-                font-size: 32px;
+            h1 {
+                font-size: 2.5em;
             }
             
-            .section-title h2 {
-                font-size: 28px;
-            }
-            
-            .hero-buttons {
+            .tabs {
                 flex-direction: column;
-                gap: 10px;
             }
             
-            .btn {
-                width: 100%;
+            .section-card {
+                padding: 20px;
             }
-            
-            nav ul {
-                display: none;
-            }
+        }
+
+        /* إشعارات */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: var(--green);
+            color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification.error {
+            background: var(--red);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+        
+        .progress {
+            height: 100%;
+            background: var(--gold);
+            width: 0%;
+            transition: width 0.3s ease;
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
-                    <h1>طلاب <span>علوم</span></h1>
-                </div>
-                <nav>
-                    <ul>
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">المواد الدراسية</a></li>
-                        <li><a href="#">المدرسون</a></li>
-                        <li><a href="#">الدورات</a></li>
-                        <li><a href="#">المجتمع</a></li>
-                        <li><a href="#">اتصل بنا</a></li>
-                    </ul>
-                </nav>
-                <div class="auth-buttons">
-                    <button id="loginBtn" class="btn btn-outline">تسجيل الدخول</button>
-                    <button id="signupBtn" class="btn btn-filled">انضم إلينا</button>
-                </div>
-            </div>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h2>منصة طلابية تشاركية لتعليم المواد العلمية</h2>
-                    <p>بالعلم نرتقي.. وبالتعاون ننتصر. انضم إلى آلاف الطلاب الذين يحققون تفوقهم الأكاديمي من خلال منصتنا التعليمية المبتكرة.</p>
-                    <div class="hero-buttons">
-                        <a href="#" class="btn btn-filled">ابدأ رحلتك التعليمية</a>
-                        <a href="#" class="btn btn-outline">استكشف المواد الدراسية</a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="طلاب يدرسون معًا">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features">
-        <div class="container">
-            <div class="section-title">
-                <h2>لماذا تختار منصة طلاب علوم؟</h2>
-                <p>نقدم تجربة تعليمية فريدة تجمع بين الجودة العالية والأسعار المناسبة</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <h3>شرح بلغة طلابية</h3>
-                    <p>مدرسون من خريجي كليات القمة يشرحون بلغة بسيطة وسهلة الفهم</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tags"></i>
-                    </div>
-                    <h3>أسعار مناسبة</h3>
-                    <p>أسعارنا تبدأ من 50% أقل من المنصات التجارية الأخرى</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-chalkboard-teacher"></i>
-                    </div>
-                    <h3>مدرسون متميزون</h3>
-                    <p>فريق من الطلاب المتفوقين والخريجين من كليات الطب والهندسة والعلوم</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-file-alt"></i>
-                    </div>
-                    <h3>مراجعات نهائية مجانية</h3>
-                    <p>نوفر مراجعات نهائية مجانية قبل الامتحانات لجميع الطلاب</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Subjects Section -->
-    <section class="subjects">
-        <div class="container">
-            <div class="section-title">
-                <h2>المواد الدراسية</h2>
-                <p>نغطي جميع المواد العلمية الأساسية بمحتوى تعليمي متكامل</p>
-            </div>
-            <div class="subjects-grid">
-                <div class="subject-card chemistry">
-                    <div class="subject-icon">
-                        <i class="fas fa-flask"></i>
-                    </div>
-                    <div class="subject-content">
-                        <h3>الكيمياء</h3>
-                        <p>شرح منهج الكيمياء بجميع فروعه من الصفر إلى الاحتراف</p>
-                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
-                    </div>
-                </div>
-                <div class="subject-card physics">
-                    <div class="subject-icon">
-                        <i class="fas fa-atom"></i>
-                    </div>
-                    <div class="subject-content">
-                        <h3>الفيزياء</h3>
-                        <p>فهم قوانين الفيزياء وتطبيقاتها العملية في الحياة اليومية</p>
-                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
-                    </div>
-                </div>
-                <div class="subject-card biology">
-                    <div class="subject-icon">
-                        <i class="fas fa-dna"></i>
-                    </div>
-                    <div class="subject-content">
-                        <h3>الأحياء</h3>
-                        <p>دراسة الكائنات الحية ووظائفها من الخلية إلى الأنظمة البيئية</p>
-                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
-                    </div>
-                </div>
-                <div class="subject-card math">
-                    <div class="subject-icon">
-                        <i class="fas fa-square-root-alt"></i>
-                    </div>
-                    <div class="subject-content">
-                        <h3>الرياضيات</h3>
-                        <p>تطوير مهارات حل المسائل الرياضية بمختلف أنواعها</p>
-                        <a href="#" class="btn btn-outline">استكشف الدروس</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Interactive Stats Section -->
-    <section class="interactive-section">
-        <div class="container">
-            <div class="section-title">
-                <h2>إحصائيات حية</h2>
-                <p>انضم إلى مجتمعنا المتنامي من الطلاب والمدرسين</p>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <div class="stat-number" id="studentsCount">0</div>
-                    <div class="stat-label">طالب مسجل</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="coursesCount">0</div>
-                    <div class="stat-label">دورة تعليمية</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="teachersCount">0</div>
-                    <div class="stat-label">مدرس معتمد</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="successRate">0%</div>
-                    <div class="stat-label">نسبة النجاح</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>تسجيل الدخول</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="email">البريد الإلكتروني</label>
-                    <input type="email" id="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="password">كلمة المرور</label>
-                    <input type="password" id="password" required>
-                </div>
-                <button type="submit" class="btn btn-filled" style="width: 100%;">تسجيل الدخول</button>
-            </form>
-            <p style="text-align: center; margin-top: 15px;">ليس لديك حساب؟ <a href="#" id="switchToSignup">سجل الآن</a></p>
+    <div class="notification" id="notification">
+        <div id="notificationText">تمت العملية بنجاح!</div>
+        <div class="progress-bar">
+            <div class="progress" id="notificationProgress"></div>
         </div>
     </div>
 
-    <!-- Signup Modal -->
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>إنشاء حساب جديد</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="fullName">الاسم الكامل</label>
-                    <input type="text" id="fullName" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupEmail">البريد الإلكتروني</label>
-                    <input type="email" id="signupEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">كلمة المرور</label>
-                    <input type="password" id="signupPassword" required>
-                </div>
-                <div class="form-group">
-                    <label for="confirmPassword">تأكيد كلمة المرور</label>
-                    <input type="password" id="confirmPassword" required>
-                </div>
-                <button type="submit" class="btn btn-filled" style="width: 100%;">إنشاء الحساب</button>
-            </form>
-            <p style="text-align: center; margin-top: 15px;">لديك حساب بالفعل؟ <a href="#" id="switchToLogin">سجل الدخول</a></p>
+    <div class="container">
+        <header>
+            <div class="header-bg"></div>
+            <h1><i class="fas fa-skull-crossbones"></i> قراصنة الدراسة <i class="fas fa-skull-crossbones"></i></h1>
+            <div class="subtitle">اكتشف كنز المعرفة مع طاقم قبعات القش!</div>
+        </header>
+        
+        <div class="tabs">
+            <button class="tab-btn active" onclick="switchTab('upload')">
+                <i class="fas fa-upload"></i> رفع الملفات
+            </button>
+            <button class="tab-btn" onclick="switchTab('manual')">
+                <i class="fas fa-edit"></i> إدخال المواد
+            </button>
         </div>
-    </div>
-
-    <!-- User Dashboard -->
-    <div id="userDashboard" class="dashboard">
-        <div class="container">
-            <div class="dashboard-header">
-                <div class="user-info">
-                    <div class="user-avatar">
-                        <i class="fas fa-user"></i>
-                    </div>
-                    <div>
-                        <h2 id="userWelcome">مرحباً، أحمد!</h2>
-                        <p>طالب في الصف الثالث الثانوي</p>
-                    </div>
-                </div>
-                <button id="logoutBtn" class="btn btn-outline">تسجيل الخروج</button>
-            </div>
-            
-            <div class="dashboard-nav">
-                <button class="active" data-tab="courses">دوراتي</button>
-                <button data-tab="progress">تقدمي</button>
-                <button data-tab="schedule">جدولي</button>
-                <button data-tab="profile">ملفي الشخصي</button>
-            </div>
-            
-            <div class="dashboard-content">
-                <div class="my-courses">
-                    <h3>دوراتي النشطة</h3>
-                    <div class="course-item">
-                        <div class="course-thumb" style="background: linear-gradient(135deg, #8E44AD, #9B59B6);"></div>
-                        <div>
-                            <h4>الكيمياء العضوية المتقدمة</h4>
-                            <p>الأستاذ أحمد محمد</p>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 75%;"></div>
-                            </div>
-                            <p>75% مكتمل</p>
+        
+        <div class="main-content">
+            <!-- قسم الإدخال -->
+            <div class="section-card upload-section">
+                <h2 class="section-title"><i class="fas fa-file-upload"></i> إدخال المواد الدراسية</h2>
+                
+                <!-- تبويب رفع الملفات -->
+                <div id="uploadTab" class="tab-content">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-icon">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                        </div>
+                        <div style="font-size: 1.2em; margin-bottom: 10px; font-weight: bold;">اسحب وأفلت الملفات هنا</div>
+                        <div style="font-size: 0.9em; color: #6b7280;">
+                            أو انقر لاختيار الملفات (PDF, Word, PowerPoint, الصور)
                         </div>
                     </div>
-                    <div class="course-item">
-                        <div class="course-thumb" style="background: linear-gradient(135deg, #3498DB, #5DADE2);"></div>
-                        <div>
-                            <h4>الفيزياء الحديثة</h4>
-                            <p>الأستاذ يوسف خالد</p>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 40%;"></div>
-                            </div>
-                            <p>40% مكتمل</p>
+                    
+                    <div class="file-list" id="fileList">
+                        <!-- الملفات المرفوعة تظهر هنا -->
+                    </div>
+                </div>
+                
+                <!-- تبويب الإدخال اليدوي -->
+                <div id="manualTab" class="tab-content" style="display: none;">
+                    <div class="manual-input">
+                        <div class="input-group">
+                            <input type="text" id="subjectInput" placeholder="أدخل اسم المادة...">
+                            <button class="add-btn" onclick="addManualSubject()">
+                                <i class="fas fa-plus"></i> إضافة
+                            </button>
+                        </div>
+                        
+                        <div class="subjects-list" id="subjectsList">
+                            <!-- المواد المضافة تظهر هنا -->
                         </div>
                     </div>
                 </div>
                 
-                <div>
-                    <div class="progress-tracker">
-                        <h3>تقدمي العام</h3>
-                        <div style="margin: 20px 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>الكيمياء</span>
-                                <span>75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 75%;"></div>
-                            </div>
-                        </div>
-                        <div style="margin: 20px 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>الفيزياء</span>
-                                <span>40%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 40%;"></div>
-                            </div>
-                        </div>
-                        <div style="margin: 20px 0;">
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                <span>الأحياء</span>
-                                <span>20%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress" style="width: 20%;"></div>
-                            </div>
-                        </div>
+                <!-- إعدادات الجدول -->
+                <div class="settings-grid">
+                    <div class="form-group">
+                        <label for="studyDays"><i class="fas fa-calendar-day"></i> عدد أيام الدراسة:</label>
+                        <input type="number" id="studyDays" min="1" max="90" value="7">
                     </div>
                     
-                    <div class="upcoming-classes">
-                        <h3>الحصص القادمة</h3>
-                        <div style="margin: 15px 0; padding: 10px; background: #f5f5f5; border-radius: 5px;">
-                            <p><strong>الكيمياء العضوية</strong></p>
-                            <p>غداً، 10:00 صباحاً</p>
-                        </div>
-                        <div style="margin: 15px 0; padding: 10px; background: #f5f5f5; border-radius: 5px;">
-                            <p><strong>الفيزياء الحديثة</strong></p>
-                            <p>بعد غد، 2:00 مساءً</p>
-                        </div>
+                    <div class="form-group">
+                        <label for="dailyHours"><i class="fas fa-clock"></i> ساعات الدراسة اليومية:</label>
+                        <select id="dailyHours">
+                            <option value="2">2 ساعات</option>
+                            <option value="3" selected>3 ساعات</option>
+                            <option value="4">4 ساعات</option>
+                            <option value="5">5 ساعات</option>
+                            <option value="6">6 ساعات</option>
+                            <option value="8">8 ساعات</option>
+                        </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <label for="startTime"><i class="fas fa-play"></i> وقت البدء:</label>
+                        <select id="startTime">
+                            <option value="8">8:00 صباحاً</option>
+                            <option value="9" selected>9:00 صباحاً</option>
+                            <option value="10">10:00 صباحاً</option>
+                            <option value="14">2:00 مساءً</option>
+                            <option value="16">4:00 مساءً</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="breakTime"><i class="fas fa-coffee"></i> مدة الاستراحة:</label>
+                        <select id="breakTime">
+                            <option value="10">10 دقائق</option>
+                            <option value="15" selected>15 دقيقة</option>
+                            <option value="20">20 دقيقة</option>
+                            <option value="30">30 دقيقة</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn btn-primary" onclick="generateSchedule()">
+                        <i class="fas fa-magic"></i> إنشاء الجدول
+                    </button>
+                    <button class="btn btn-secondary" onclick="clearAll()">
+                        <i class="fas fa-trash"></i> مسح الكل
+                    </button>
+                </div>
+            </div>
+            
+            <!-- قسم عرض الجدول -->
+            <div class="section-card schedule-section">
+                <h2 class="section-title"><i class="fas fa-calendar-alt"></i> جدول الدراسة</h2>
+                
+                <div class="schedule-display" id="scheduleDisplay">
+                    <div class="empty-state">
+                        <i class="fas fa-calendar-plus"></i>
+                        <div style="font-size: 1.2em; margin-bottom: 10px;">لا يوجد جدول حالياً</div>
+                        <div>قم بإضافة المواد وإنشاء الجدول لعرضه هنا</div>
+                    </div>
+                </div>
+                
+                <div class="download-section">
+                    <button class="btn btn-success" onclick="downloadPDF()">
+                        <i class="fas fa-file-pdf"></i> تحميل PDF
+                    </button>
+                    <button class="btn btn-secondary" onclick="downloadJSON()">
+                        <i class="fas fa-file-code"></i> تحميل JSON
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>طلاب علوم</h3>
-                    <p>منصة طلابية تشاركية لتعليم المواد العلمية، نهدف إلى تقديم تعليم عالي الجودة بأسعار مناسبة للجميع.</p>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>روابط سريعة</h3>
-                    <ul>
-                        <li><a href="#">الرئيسية</a></li>
-                        <li><a href="#">من نحن</a></li>
-                        <li><a href="#">المواد الدراسية</a></li>
-                        <li><a href="#">المدرسون</a></li>
-                        <li><a href="#">المدونة</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>المواد الدراسية</h3>
-                    <ul>
-                        <li><a href="#">الكيمياء</a></li>
-                        <li><a href="#">الفيزياء</a></li>
-                        <li><a href="#">الأحياء</a></li>
-                        <li><a href="#">الرياضيات</a></li>
-                        <li><a href="#">المسارات المتقدمة</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>اتصل بنا</h3>
-                    <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> القاهرة، مصر</li>
-                        <li><i class="fas fa-phone"></i> +20 123 456 7890</li>
-                        <li><i class="fas fa-envelope"></i> info@tullab-ulum.com</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>جميع الحقوق محفوظة &copy; 2023 منصة طلاب علوم</p>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        // عناصر DOM
-        const loginBtn = document.getElementById('loginBtn');
-        const signupBtn = document.getElementById('signupBtn');
-        const loginModal = document.getElementById('loginModal');
-        const signupModal = document.getElementById('signupModal');
-        const closeModalButtons = document.querySelectorAll('.close-modal');
-        const switchToSignup = document.getElementById('switchToSignup');
-        const switchToLogin = document.getElementById('switchToLogin');
-        const loginForm = document.getElementById('loginForm');
-        const signupForm = document.getElementById('signupForm');
-        const userDashboard = document.getElementById('userDashboard');
-        const logoutBtn = document.getElementById('logoutBtn');
-        const dashboardNavButtons = document.querySelectorAll('.dashboard-nav button');
+        // تهيئة jsPDF
+        const { jsPDF } = window.jspdf;
         
-        // فتح نافذة تسجيل الدخول
-        loginBtn.addEventListener('click', () => {
-            loginModal.style.display = 'flex';
-        });
+        let uploadedFiles = [];
+        let manualSubjects = [];
+        let currentSchedule = [];
+        let currentTab = 'upload';
         
-        // فتح نافذة إنشاء حساب
-        signupBtn.addEventListener('click', () => {
-            signupModal.style.display = 'flex';
-        });
-        
-        // إغلاق النوافذ
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                loginModal.style.display = 'none';
-                signupModal.style.display = 'none';
-            });
-        });
-        
-        // التبديل بين نافذتي تسجيل الدخول وإنشاء حساب
-        switchToSignup.addEventListener('click', (e) => {
-            e.preventDefault();
-            loginModal.style.display = 'none';
-            signupModal.style.display = 'flex';
-        });
-        
-        switchToLogin.addEventListener('click', (e) => {
-            e.preventDefault();
-            signupModal.style.display = 'none';
-            loginModal.style.display = 'flex';
-        });
-        
-        // معالجة تسجيل الدخول
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // في التطبيق الحقيقي، هنا سيتم التحقق من بيانات المستخدم
-            loginModal.style.display = 'none';
-            userDashboard.style.display = 'block';
-            document.querySelector('header').style.display = 'none';
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.features').style.display = 'none';
-            document.querySelector('.subjects').style.display = 'none';
-            document.querySelector('.interactive-section').style.display = 'none';
-            document.querySelector('footer').style.marginTop = '0';
-        });
-        
-        // معالجة إنشاء حساب
-        signupForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            // في التطبيق الحقيقي، هنا سيتم إنشاء حساب جديد
-            signupModal.style.display = 'none';
-            userDashboard.style.display = 'block';
-            document.querySelector('header').style.display = 'none';
-            document.querySelector('.hero').style.display = 'none';
-            document.querySelector('.features').style.display = 'none';
-            document.querySelector('.subjects').style.display = 'none';
-            document.querySelector('.interactive-section').style.display = 'none';
-            document.querySelector('footer').style.marginTop = '0';
+        // إظهار الإشعارات
+        function showNotification(message, isError = false, duration = 3000) {
+            const notification = document.getElementById('notification');
+            const notificationText = document.getElementById('notificationText');
+            const progress = document.getElementById('notificationProgress');
             
-            // تعيين اسم المستخدم
-            const fullName = document.getElementById('fullName').value;
-            document.getElementById('userWelcome').textContent = `مرحباً، ${fullName}!`;
-        });
-        
-        // تسجيل الخروج
-        logoutBtn.addEventListener('click', () => {
-            userDashboard.style.display = 'none';
-            document.querySelector('header').style.display = 'block';
-            document.querySelector('.hero').style.display = 'block';
-            document.querySelector('.features').style.display = 'block';
-            document.querySelector('.subjects').style.display = 'block';
-            document.querySelector('.interactive-section').style.display = 'block';
-            document.querySelector('footer').style.marginTop = '';
-        });
-        
-        // التنقل في لوحة التحكم
-        dashboardNavButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                dashboardNavButtons.forEach(btn => btn.classList.remove('active'));
-                button.classList.add('active');
-                // في التطبيق الحقيقي، هنا سيتم تغيير محتوى لوحة التحكم
-            });
-        });
-        
-        // إحصائيات متحركة
-        function animateCounter(element, target, duration) {
-            let start = 0;
-            const increment = target / (duration / 16);
-            const timer = setInterval(() => {
-                start += increment;
-                if (start >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(start);
-                }
-            }, 16);
+            notificationText.textContent = message;
+            notification.className = `notification ${isError ? 'error' : ''} show`;
+            progress.style.width = '100%';
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    progress.style.width = '0%';
+                }, 300);
+            }, duration);
         }
         
-        // تشغيل العدادات عند التمرير للقسم
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateCounter(document.getElementById('studentsCount'), 1250, 2000);
-                    animateCounter(document.getElementById('coursesCount'), 48, 1500);
-                    animateCounter(document.getElementById('teachersCount'), 32, 1500);
-                    
-                    let rate = 0;
-                    const rateInterval = setInterval(() => {
-                        rate += 1;
-                        document.getElementById('successRate').textContent = `${rate}%`;
-                        if (rate >= 94) clearInterval(rateInterval);
-                    }, 20);
-                    
-                    observer.unobserve(entry.target);
-                }
+        // تبديل التبويبات
+        function switchTab(tabName) {
+            currentTab = tabName;
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.style.display = 'none');
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + 'Tab').style.display = 'block';
+            showNotification(`تم التبديل إلى ${tabName === 'upload' ? 'رفع الملفات' : 'الإدخال اليدوي'}`);
+        }
+        
+        // نظام رفع الملفات
+        const uploadArea = document.getElementById('uploadArea');
+        const fileList = document.getElementById('fileList');
+        
+        uploadArea.addEventListener('click', () => {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.accept = '.pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.txt';
+            input.onchange = handleFileSelect;
+            input.click();
+        });
+        
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+        
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+        
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+            showNotification(`تم رفع ${e.dataTransfer.files.length} ملف بنجاح!`);
+        });
+        
+        function handleFileSelect(e) {
+            handleFiles(e.target.files);
+            showNotification(`تم رفع ${e.target.files.length} ملف بنجاح!`);
+        }
+        
+        function handleFiles(files) {
+            for (let file of files) {
+                uploadedFiles.push({
+                    name: file.name.replace(/\.[^/.]+$/, ""), // إزالة الامتداد
+                    size: file.size,
+                    type: file.type,
+                    originalName: file.name
+                });
+            }
+            updateFileList();
+        }
+        
+        function updateFileList() {
+            fileList.innerHTML = '';
+            uploadedFiles.forEach((file, index) => {
+                const fileItem = document.createElement('div');
+                fileItem.className = 'subject-item';
+                fileItem.innerHTML = `
+                    <span>${file.name}</span>
+                    <div class="subject-actions">
+                        <span style="color: #6b7280; font-size: 0.9em;">${formatFileSize(file.size)}</span>
+                        <button class="delete-btn" onclick="removeFile(${index})">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                `;
+                fileList.appendChild(fileItem);
             });
-        }, { threshold: 0.5 });
+        }
         
-        observer.observe(document.querySelector('.interactive-section'));
+        function removeFile(index) {
+            uploadedFiles.splice(index, 1);
+            updateFileList();
+            showNotification('تم حذف الملف');
+        }
         
-        // إضافة تأثيرات للبطاقات عند التمرير
-        const cards = document.querySelectorAll('.feature-card, .subject-card, .course-card');
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }
+        // نظام الإدخال اليدوي
+        function addManualSubject() {
+            const input = document.getElementById('subjectInput');
+            const subjectName = input.value.trim();
+            
+            if (subjectName) {
+                manualSubjects.push({
+                    name: subjectName,
+                    type: 'manual'
+                });
+                input.value = '';
+                updateSubjectsList();
+                showNotification('تم إضافة المادة بنجاح!');
+            } else {
+                showNotification('يرجى إدخال اسم المادة', true);
+            }
+        }
+        
+        function updateSubjectsList() {
+            const subjectsList = document.getElementById('subjectsList');
+            subjectsList.innerHTML = '';
+            
+            manualSubjects.forEach((subject, index) => {
+                const subjectItem = document.createElement('div');
+                subjectItem.className = 'subject-item';
+                subjectItem.innerHTML = `
+                    <span>${subject.name}</span>
+                    <button class="delete-btn" onclick="removeManualSubject(${index})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+                subjectsList.appendChild(subjectItem);
             });
-        }, { threshold: 0.1 });
+        }
         
-        cards.forEach(card => {
-            card.style.opacity = 0;
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'opacity 0.5s, transform 0.5s';
-            cardObserver.observe(card);
+        function removeManualSubject(index) {
+            manualSubjects.splice(index, 1);
+            updateSubjectsList();
+            showNotification('تم حذف المادة');
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        // نظام إنشاء الجدول
+        function generateSchedule() {
+            let subjects = [];
+            
+            if (currentTab === 'upload') {
+                subjects = uploadedFiles.map(file => file.name);
+            } else {
+                subjects = manualSubjects.map(subject => subject.name);
+            }
+            
+            if (subjects.length === 0) {
+                showNotification('🏴‍☠️ يا رفيق! تحتاج لإضافة بعض المواد أولاً!', true);
+                return;
+            }
+            
+            const scheduleDisplay = document.getElementById('scheduleDisplay');
+            scheduleDisplay.innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><div>يتم إنشاء الجدول...</div></div>';
+            
+            // محاكاة التحميل
+            setTimeout(() => {
+                const studyDays = parseInt(document.getElementById('studyDays').value);
+                const dailyHours = parseInt(document.getElementById('dailyHours').value);
+                const startTime = parseInt(document.getElementById('startTime').value);
+                const breakTime = parseInt(document.getElementById('breakTime').value);
+                
+                scheduleDisplay.innerHTML = '';
+                currentSchedule = [];
+                const subjectsPerDay = Math.ceil(subjects.length / studyDays);
+                const studyMinutes = dailyHours * 60;
+                const minutesPerSubject = Math.floor(studyMinutes / subjectsPerDay);
+                
+                for (let day = 1; day <= studyDays; day++) {
+                    const daySchedule = {
+                        day: day,
+                        hours: dailyHours,
+                        items: []
+                    };
+                    
+                    const dayElement = document.createElement('div');
+                    dayElement.className = 'day-schedule';
+                    
+                    const dayHeader = document.createElement('div');
+                    dayHeader.className = 'day-header';
+                    dayHeader.innerHTML = `
+                        <span>اليوم ${day}</span>
+                        <span>${dailyHours} ساعات دراسة</span>
+                    `;
+                    dayElement.appendChild(dayHeader);
+                    
+                    const startIndex = (day - 1) * subjectsPerDay;
+                    const endIndex = Math.min(startIndex + subjectsPerDay, subjects.length);
+                    
+                    let currentTime = startTime * 60; // تحويل إلى دقائق
+                    
+                    for (let i = startIndex; i < endIndex; i++) {
+                        if (i >= subjects.length) break;
+                        
+                        const subjectTime = Math.max(30, Math.min(120, minutesPerSubject));
+                        const startTimeStr = formatTime(currentTime);
+                        const endTimeStr = formatTime(currentTime + subjectTime);
+                        
+                        // إضافة مادة الدراسة
+                        daySchedule.items.push({
+                            type: 'study',
+                            subject: subjects[i],
+                            startTime: startTimeStr,
+                            endTime: endTimeStr,
+                            duration: subjectTime
+                        });
+                        
+                        const studyElement = document.createElement('div');
+                        studyElement.className = 'schedule-item study';
+                        studyElement.innerHTML = `
+                            <div>
+                                <i class="fas fa-book"></i>
+                                <strong>${subjects[i]}</strong>
+                            </div>
+                            <div class="time-badge">
+                                ${startTimeStr} - ${endTimeStr}
+                            </div>
+                        `;
+                        dayElement.appendChild(studyElement);
+                        
+                        currentTime += subjectTime;
+                        
+                        // إضافة استراحة بعد كل مادتين
+                        if ((i - startIndex + 1) % 2 === 0 && (i - startIndex + 1) < (endIndex - startIndex)) {
+                            const breakStart = formatTime(currentTime);
+                            const breakEnd = formatTime(currentTime + breakTime);
+                            
+                            daySchedule.items.push({
+                                type: 'break',
+                                description: 'استراحة',
+                                startTime: breakStart,
+                                endTime: breakEnd,
+                                duration: breakTime
+                            });
+                            
+                            const breakElement = document.createElement('div');
+                            breakElement.className = 'schedule-item break';
+                            breakElement.innerHTML = `
+                                <div>
+                                    <i class="fas fa-coffee"></i>
+                                    <span>استراحة</span>
+                                </div>
+                                <div class="time-badge">
+                                    ${breakStart} - ${breakEnd}
+                                </div>
+                            `;
+                            dayElement.appendChild(breakElement);
+                            
+                            currentTime += breakTime;
+                        }
+                    }
+                    
+                    currentSchedule.push(daySchedule);
+                    scheduleDisplay.appendChild(dayElement);
+                }
+                
+                showNotification('🎉 تم إنشاء الجدول بنجاح!');
+            }, 1500);
+        }
+        
+        function formatTime(minutes) {
+            const hours = Math.floor(minutes / 60);
+            const mins = minutes % 60;
+            const period = hours >= 12 ? 'مساءً' : 'صباحاً';
+            const displayHours = hours > 12 ? hours - 12 : hours;
+            return `${displayHours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')} ${period}`;
+        }
+        
+        // تحميل PDF مع إصلاح مشكلة العربية
+        async function downloadPDF() {
+            if (currentSchedule.length === 0) {
+                showNotification('🏴‍☠️ تحتاج لإنشاء جدول أولاً يا رفيق!', true);
+                return;
+            }
+            
+            showNotification('📄 يتم إنشاء ملف PDF...');
+            
+            try {
+                // استخدام html2canvas لالتقاط الصورة
+                const scheduleElement = document.getElementById('scheduleDisplay');
+                
+                const canvas = await html2canvas(scheduleElement, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff'
+                });
+                
+                const imgData = canvas.toDataURL('image/png');
+                const doc = new jsPDF('p', 'mm', 'a4');
+                
+                // إضافة صورة الجدول
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const pageHeight = doc.internal.pageSize.getHeight();
+                const imgWidth = canvas.width;
+                const imgHeight = canvas.height;
+                const ratio = imgWidth / imgHeight;
+                const width = pageWidth - 20;
+                const height = width / ratio;
+                
+                doc.addImage(imgData, 'PNG', 10, 10, width, height);
+                
+                // إضافة ترويسة
+                doc.setFontSize(20);
+                doc.setTextColor(255, 107, 0);
+                doc.text('جدول الدراسة - قراصنة المعرفة', pageWidth / 2, 280, { align: 'center' });
+                
+                doc.setFontSize(10);
+                doc.setTextColor(100, 100, 100);
+                doc.text(`تم الإنشاء في: ${new Date().toLocaleDateString('ar-EG')}`, pageWidth / 2, 285, { align: 'center' });
+                
+                doc.save('جدول_الدراسة_المثالي.pdf');
+                showNotification('✅ تم تحميل PDF بنجاح!');
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showNotification('❌ حدث خطأ في إنشاء PDF', true);
+            }
+        }
+        
+        // تحميل JSON
+        function downloadJSON() {
+            if (currentSchedule.length === 0) {
+                showNotification('🏴‍☠️ تحتاج لإنشاء جدول أولاً يا رفيق!', true);
+                return;
+            }
+            
+            const scheduleData = {
+                subjects: currentTab === 'upload' ? uploadedFiles : manualSubjects,
+                schedule: currentSchedule,
+                settings: {
+                    days: document.getElementById('studyDays').value,
+                    hours: document.getElementById('dailyHours').value,
+                    startTime: document.getElementById('startTime').value,
+                    breakTime: document.getElementById('breakTime').value
+                },
+                generatedAt: new Date().toLocaleString(),
+                theme: "ون بيس - قراصنة الدراسة"
+            };
+            
+            const blob = new Blob([JSON.stringify(scheduleData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'جدول_الدراسة_قراصنة.json';
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('💾 تم تحميل JSON بنجاح!');
+        }
+        
+        // مسح الكل
+        function clearAll() {
+            uploadedFiles = [];
+            manualSubjects = [];
+            currentSchedule = [];
+            updateFileList();
+            updateSubjectsList();
+            document.getElementById('scheduleDisplay').innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-calendar-plus"></i>
+                    <div style="font-size: 1.2em; margin-bottom: 10px;">لا يوجد جدول حالياً</div>
+                    <div>قم بإضافة المواد وإنشاء الجدول لعرضه هنا</div>
+                </div>
+            `;
+            showNotification('🗑️ تم مسح كل البيانات');
+        }
+        
+        // السماح بإضافة المواد بالضغط على Enter
+        document.getElementById('subjectInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                addManualSubject();
+            }
         });
     </script>
 </body>
